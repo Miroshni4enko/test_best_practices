@@ -1,9 +1,11 @@
 ## Ruby, Rspec testing best practices
-First of all, before writing tests, we should change our mindset. The test is an isolated document. They are not a code that you need to improve with principles like DRY and etc.
+First of all, before writing tests, we should change our mindset. The test is an isolated document. 
+They are not a code that you need to improve with principles like DRY and etc.
 
 ### Test suite
-To create a good test suite you should consider a testing pyramid and TDD as the main approach for writing tests. There are a lot of resources, I just add which I liked the most.  
-- https://martinfowler.com/bliki/TestPyramid.html
+To create a good test suite you should consider a testing pyramid and TDD as the main approach for writing tests. 
+There are a lot of resources, I just add which I liked the most.  
+ - https://martinfowler.com/bliki/TestPyramid.html
  - https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530
 
 ### Mystery Guests
@@ -45,26 +47,34 @@ If you have a test similar to this one below, you definitely need to rewrite you
       end
     end
 ```
- There are several problems with these tests most of them because they are not isolated.
-The first problem, when you need to add some new test or change existed one you need to figure out what each let do and if you need it or not. 
-The second problem, readability. It is really hard to understand, in which circumstance, for example, the last test should work. You need to understand each let, before, and shared examples. Also `super` is really awful.
+
+
+There are several problems with these tests most of them because they are not isolated.
+The first problem, when you need to add some new test or change existed one you need to figure out 
+what each `let` do and if you need it or not. 
+The second problem, readability. It is really hard to understand, in which circumstance, for example, the last test should work. 
+You need to understand each `let`, `before`, and `shared examples`. Also `super` is really awful.
+
 There are cool articles wrote by ThoughtBot, which helps you to avoid Mystery Guests:
-(DISCLAIMER: let, before and shared examples in most cases are evil )
+(DISCLAIMER: `let`, `before` and `shared examples` in most cases are evil )
  - https://thoughtbot.com/blog/mystery-guest
  - https://thoughtbot.com/blog/my-issues-with-let
  - https://thoughtbot.com/blog/lets-not
 
 ### BDD
 
-If we open the RSpec home page, there is a title ‘Behaviour Driven Development for Ruby’. So, for writing tests in BDD style, you don’t need cucumber or any other frameworks. Please, just use the `describe` block to test your feature or method, then inside use the `context` block, which should be starting with when, when, with, without, if, unless, for keywords. For auto check it in your project you can use rspec-rubocop gem and use the next cop. https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ContextWording 
-Please, don’t forget that test is a document, so don’t write description just to fill quotes, please think about it as you think about the naming of variables
+If we open the RSpec home page, there is a title ‘Behaviour Driven Development for Ruby’. 
+So, for writing tests in BDD style, you don’t need cucumber or any other frameworks. 
+Please, just use the `describe` block to test your feature or method, then inside use the `context` block, which should be starting with when, when, with, without, if, unless, for keywords. 
+For auto check it in your project you can use rspec-rubocop gem and use the [next cop](https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ContextWording).
+Please, don’t forget that test is a document, so don’t write description just to fill quotes, please think about it as you think about the naming of variables, methods and classes.
  
 Example of a good test: 
 
 ```
 describe ‘user authentication’ do
   context ‘when a password is incorrect’ do 
-    It ‘shows wrong password popup’ do 
+    it ‘shows wrong password popup’ do 
        …
     end
    end
@@ -109,7 +119,7 @@ RSpec.configure do |config|
   config.after(:each, :use_vcr) do
     VCR.turn_off!
   end
-
+end
 ```
 
 ### Tests as a tool to improve your code architecture
@@ -124,4 +134,4 @@ If you have problems with performance, consider how much DB calls do you have in
 Also, a good tool [TestProf](https://test-prof.evilmartians.io/#/). It has lots of cool practics and profiler to improve performance in tests.
 
 ### Test coverage 
-Actually, if you use TDD you don’t need to check test coverage. But if you really need to check it use a tool like a [mutant] (https://github.com/mbj/mutant). It shows you more realistic numbers than [SimpleCov](https://github.com/colszowka/simplecov).
+Actually, if you use TDD you don’t need to check test coverage. But if you really need to check it use a tool like a [mutant](https://github.com/mbj/mutant). It shows you more realistic numbers than [SimpleCov](https://github.com/colszowka/simplecov).
