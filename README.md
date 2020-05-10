@@ -4,12 +4,14 @@ They are not a code that you need to improve with principles like DRY and etc.
 
 ### Test suite
 To create a good test suite you should consider a testing pyramid and TDD as the main approach for writing tests. 
+
 There are a lot of resources, I just add which I liked the most.  
  - https://martinfowler.com/bliki/TestPyramid.html
  - https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530
 
 ### Mystery Guests
 The most noticeable examples of the wrong mindset are Mystery Guests.
+
 If you have a test similar to this one below, you definitely need to rewrite your tests:
 ```ruby
   describe 'GET #index' do
@@ -50,8 +52,10 @@ If you have a test similar to this one below, you definitely need to rewrite you
 
 
 There are several problems with these tests most of them because they are not isolated.
+
 The first problem, when you need to add some new test or change existed one you need to figure out 
 what each `let` do and if you need it or not. 
+
 The second problem, readability. It is really hard to understand, in which circumstance, for example, the last test should work. 
 You need to understand each `let`, `before`, and `shared examples`. Also `super` is really awful.
 
@@ -64,9 +68,13 @@ There are cool articles wrote by ThoughtBot, which helps you to avoid Mystery Gu
 ### BDD
 
 If we open the RSpec home page, there is a title ‘Behaviour Driven Development for Ruby’. 
+
 So, for writing tests in BDD style, you don’t need cucumber or any other frameworks. 
+
 Please, just use the `describe` block to test your feature or method, then inside use the `context` block, which should be starting with when, when, with, without, if, unless, for keywords. 
+
 For auto check it in your project you can use rspec-rubocop gem and use the [next cop](https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ContextWording).
+
 Please, don’t forget that test is a document, so don’t write description just to fill quotes, please think about it as you think about the naming of variables, methods and classes.
  
 Example of a good test: 
@@ -84,13 +92,18 @@ end
 ### Testing API calls
 
 There are lots of tools that help you to stub and mock API calls. For me, the best is [WebMock](http://github.com/bblimke/webmock) and [VCR](https://github.com/vcr/vcr). 
+
 WebMock gives you opportunities to mock any API call with the ease and flexible interface, for examples if you want to mock connection timeout, you just need to write:
 ```
 stub_request(:any, 'www.example.net').to_timeout
 ```
 You can find lots of examples on how to mock API calls to behave as you want in README for [webmock](http://github.com/bblimke/webmock).
-VCR records your test suite's HTTP interactions and replay them during future test runs. For me, it is the truest way to test API calls as VCR writes the real response. We don’t need to create a fake response when we can miss some info. But VCR has a pure functionality to test API errors when you need to mock response.
-For me the best way to use both VCR and WebMock. When you install it, there can be some errors as they both trying to manage API calls from your tests.
+
+VCR records your test suite's HTTP interactions and replay them during future test runs. For me, it is the truest way to test API calls as VCR writes the real response. We don’t need to create a fake response when we can miss some info. But VCR has a pure functionality to test API errors when you need to mock response. 
+
+The best way to use both VCR and WebMock.
+
+When you install them, there can be some errors as they both trying to manage API calls from your tests.
 So, I decided to use WebMock as the main tool and when I need to test real API call I use VCR with adding `:use_vcr` attribute to test.
 My `rspec_helper.rb` (if you have a better approach, please share it with me) : 
 ```
@@ -124,6 +137,7 @@ end
 
 ### Tests as a tool to improve your code architecture
 If you notice that you need to write lots of stubs and mock to write a test, It means that you need to change architecture, in most cases adding an abstraction or writing code through DI will help you.
+
 Also without tests, you can not refactor your code, as you are scared of broke some logic. The only good test suite can answer you if you broke something or not when your refactoring.
 
 ### Testing private methods
