@@ -1,17 +1,17 @@
-## Testing best practices
+# Testing best practices
 (Mostly for Ruby and Rspec)
 
 First of all, before writing tests, we should change our mindset. The test is an isolated document. 
 They are not a code that you need to improve with principles like DRY and etc.
 
-### Test suite
+## Test suite
 To create a good test suite you should consider a testing pyramid and TDD as the main approach for writing tests. 
 
 There are a lot of resources, I just add which I liked the most.  
  - https://martinfowler.com/bliki/TestPyramid.html
  - https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530
 
-### Mystery Guests
+## Mystery Guests
 The most noticeable examples of the wrong mindset are Mystery Guests.
 
 If you have a test similar to this one below, you definitely need to rewrite your tests:
@@ -67,7 +67,7 @@ There are cool articles wrote by ThoughtBot, which helps you to avoid Mystery Gu
  - https://thoughtbot.com/blog/my-issues-with-let
  - https://thoughtbot.com/blog/lets-not
 
-### BDD
+## BDD
 
 If we open the RSpec home page, there is a title ‘Behaviour Driven Development for Ruby’. 
 
@@ -91,7 +91,7 @@ describe 'user authentication' do
 end
 ```
  
-### API calls
+## API calls
 
 There are lots of tools that help you to stub and mock API calls. For me, the best is [WebMock](http://github.com/bblimke/webmock) and [VCR](https://github.com/vcr/vcr). 
 
@@ -138,22 +138,22 @@ RSpec.configure do |config|
 end
 ```
 
-### Code architecture
+## Code architecture
 If you notice that you need to write lots of stubs and mock to write a test, It means that you need to change architecture, in most cases adding an abstraction or writing code through DI will help you.
 
 Also without tests, you can not refactor your code, as you are scared of broke some logic. The only good test suite can answer you if you broke something or not when your refactoring.
 
-### Private methods
+## Private methods
 [Shoud I  test private methods?](http://shoulditestprivatemethods.com/) thanks to [Kent Beck](https://twitter.com/KentBeck).
 
 Private methods are just a implementation details. The behavior of the object has already been tested. 
 
 If you want to test private methods it indicates that something with a separate responsibility wants to be extracted and given a public interface. 
 
-### Performance
+## Performance
 If you have problems with performance of tests, consider how much DB calls do you have in your unit tests? Ideally, there are should be no DB calls or any other calls to a third party in unit tests.
 Also, a good tool [TestProf](https://test-prof.evilmartians.io/#/). It has nice tools for profiling to improve performance and good practices. 
 But be careful, in most cases if you decided to use these practices it means your tests have a smell.
 
-### Coverage 
+## Test Coverage 
 Actually, if you use TDD you don’t need to check test coverage. But if you really need to check it use a tool like a [mutant](https://github.com/mbj/mutant). It shows you more realistic numbers than [SimpleCov](https://github.com/colszowka/simplecov). Consider, that mutation testing is slow and try to use it for a certain feature not for the whole project to reduce time.
