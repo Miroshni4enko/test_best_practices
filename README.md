@@ -142,7 +142,7 @@ If you notice that you need to write lots of stubs and mock to write a test, It 
 Also without tests, you can not refactor your code, as you are scared of broke some logic. The only good test suite can answer you if you broke something or not when your refactoring.
 
 ### Testing private methods
-Use this link [shouditestprivatemethods](http://shoulditestprivatemethods.com/), thanks to Kent Beck.
+[Shoud I  test private methods? ](http://shoulditestprivatemethods.com/), thanks to [Kent Beck](https://twitter.com/KentBeck).
 
 Private methods are just a implementation details. The behavior of the object has already been tested. 
 
