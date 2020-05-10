@@ -142,11 +142,15 @@ If you notice that you need to write lots of stubs and mock to write a test, It 
 Also without tests, you can not refactor your code, as you are scared of broke some logic. The only good test suite can answer you if you broke something or not when your refactoring.
 
 ### Testing private methods
-Use this link [shouditestprivatemethods](http://shoulditestprivatemethods.com/), thanks to Kent Beck
+Use this link [shouditestprivatemethods](http://shoulditestprivatemethods.com/), thanks to Kent Beck.
+
+Private methods are just a implementation details. The behavior of the object has already been tested. 
+
+If you want to test private methods it indicates that something with a separate responsibility wants to be extracted and given a public interface. 
 
 ### Performance of tests
 If you have problems with performance, consider how much DB calls do you have in your unit tests? Ideally, there are should be no DB calls or any other calls to a third party in unit tests.
 Also, a good tool [TestProf](https://test-prof.evilmartians.io/#/). It has lots of cool practics and profiler to improve performance in tests.
 
 ### Test coverage 
-Actually, if you use TDD you don’t need to check test coverage. But if you really need to check it use a tool like a [mutant](https://github.com/mbj/mutant). It shows you more realistic numbers than [SimpleCov](https://github.com/colszowka/simplecov).
+Actually, if you use TDD you don’t need to check test coverage. But if you really need to check it use a tool like a [mutant](https://github.com/mbj/mutant). It shows you more realistic numbers than [SimpleCov](https://github.com/colszowka/simplecov). Consider, that mutation testing is slow and try to use it for a certain feature not for the whole project to reduce time.
