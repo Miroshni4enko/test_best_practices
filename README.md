@@ -1,4 +1,6 @@
-## Ruby, Rspec testing best practices
+## Testing best practices
+(Mostly for Ruby and Rspec)
+
 First of all, before writing tests, we should change our mindset. The test is an isolated document. 
 They are not a code that you need to improve with principles like DRY and etc.
 
@@ -89,7 +91,7 @@ describe 'user authentication' do
 end
 ```
  
-### Testing API calls
+### API calls
 
 There are lots of tools that help you to stub and mock API calls. For me, the best is [WebMock](http://github.com/bblimke/webmock) and [VCR](https://github.com/vcr/vcr). 
 
@@ -136,21 +138,22 @@ RSpec.configure do |config|
 end
 ```
 
-### Tests as a tool to improve your code architecture
+### Code architecture
 If you notice that you need to write lots of stubs and mock to write a test, It means that you need to change architecture, in most cases adding an abstraction or writing code through DI will help you.
 
 Also without tests, you can not refactor your code, as you are scared of broke some logic. The only good test suite can answer you if you broke something or not when your refactoring.
 
-### Testing private methods
-[Shoud I  test private methods? ](http://shoulditestprivatemethods.com/), thanks to [Kent Beck](https://twitter.com/KentBeck).
+### Private methods
+[Shoud I  test private methods?](http://shoulditestprivatemethods.com/) thanks to [Kent Beck](https://twitter.com/KentBeck).
 
 Private methods are just a implementation details. The behavior of the object has already been tested. 
 
 If you want to test private methods it indicates that something with a separate responsibility wants to be extracted and given a public interface. 
 
-### Performance of tests
-If you have problems with performance, consider how much DB calls do you have in your unit tests? Ideally, there are should be no DB calls or any other calls to a third party in unit tests.
-Also, a good tool [TestProf](https://test-prof.evilmartians.io/#/). It has lots of cool practics and profiler to improve performance in tests.
+### Performance
+If you have problems with performance of tests, consider how much DB calls do you have in your unit tests? Ideally, there are should be no DB calls or any other calls to a third party in unit tests.
+Also, a good tool [TestProf](https://test-prof.evilmartians.io/#/). It has nice tools for profiling to improve performance and good practices. 
+But be careful, in most cases if you decided to use these practices it means your tests have a smell.
 
-### Test coverage 
+### Coverage 
 Actually, if you use TDD you don’t need to check test coverage. But if you really need to check it use a tool like a [mutant](https://github.com/mbj/mutant). It shows you more realistic numbers than [SimpleCov](https://github.com/colszowka/simplecov). Consider, that mutation testing is slow and try to use it for a certain feature not for the whole project to reduce time.
