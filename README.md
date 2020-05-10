@@ -79,7 +79,7 @@ Please, don’t forget that test is a document, so don’t write description jus
  
 Example of a good test: 
 
-```
+```ruby
 describe ‘user authentication’ do
   context ‘when a password is incorrect’ do 
     it ‘shows wrong password popup’ do 
@@ -106,7 +106,8 @@ The best way to use both VCR and WebMock.
 When you install them, there can be some errors as they both trying to manage API calls from your tests.
 So, I decided to use WebMock as the main tool and when I need to test real API call I use VCR with adding `:use_vcr` attribute to test.
 My `rspec_helper.rb` (if you have a better approach, please share it with me) : 
-```
+
+```ruby
 require 'vcr'
 
 VCR.configure do |c|
