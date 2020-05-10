@@ -80,9 +80,9 @@ Please, don’t forget that test is a document, so don’t write description jus
 Example of a good test: 
 
 ```ruby
-describe ‘user authentication’ do
-  context ‘when a password is incorrect’ do 
-    it ‘shows wrong password popup’ do 
+describe 'user authentication' do
+  context 'when a password is incorrect' do 
+    it 'shows wrong password popup' do 
        …
     end
    end
@@ -94,7 +94,7 @@ end
 There are lots of tools that help you to stub and mock API calls. For me, the best is [WebMock](http://github.com/bblimke/webmock) and [VCR](https://github.com/vcr/vcr). 
 
 WebMock gives you opportunities to mock any API call with the ease and flexible interface, for examples if you want to mock connection timeout, you just need to write:
-```
+```ruby
 stub_request(:any, 'www.example.net').to_timeout
 ```
 You can find lots of examples on how to mock API calls to behave as you want in README for [webmock](http://github.com/bblimke/webmock).
